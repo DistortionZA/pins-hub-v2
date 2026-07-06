@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pins Hub V2
 
-## Getting Started
+Pins Hub V2 is a clean rebuild of the internal Pins & Knuckles operations platform. It is being built in a separate repo while Pins Hub V1 stays live for the sales team and existing operational workflows.
 
-First, run the development server:
+V2 is currently in the post-spike foundation stage. The goal is to keep the base small, explicit, and easy to reason about before moving proven V1 features across.
+
+## Stack
+
+- Next.js App Router
+- React
+- TypeScript
+- Tailwind CSS
+- PostgreSQL
+- Drizzle ORM
+- Docker Compose for local database services
+- Adminer for local database inspection
+
+## Local Setup
+
+Copy the local environment example:
+
+```bash
+cp .env.example .env
+```
+
+Start the local database services:
+
+```bash
+docker compose up -d
+```
+
+Run database migrations:
+
+```bash
+npm run db:migrate
+```
+
+Start the Next.js app locally:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Useful checks:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run lint
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Docker Services
 
-## Learn More
+`docker-compose.yml` currently starts:
 
-To learn more about Next.js, take a look at the following resources:
+- PostgreSQL on local port `55432`
+- Adminer on local port `8080`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The Next.js app is not Dockerized during local development. It runs through `npm run dev`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Drizzle Commands
 
-## Deploy on Vercel
+Generate migrations after schema changes:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run db:generate
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Apply migrations to the configured database:
+
+```bash
+npm run db:migrate
+```
+
+Open Drizzle Studio:
+
+```bash
+npm run db:studio
+```
+
+Review generated SQL before applying migrations. Do not add database tables for future ideas until there is a current workflow that needs them.
+
+## Secrets
+
+Do not commit `.env`, production database URLs, credentials, API keys, or other secrets. `.env.example` should contain local placeholder values only.
+
+## Current Spike Scope
+
+Phase 0 confirmed the basic V2 stack with:
+
+- Docker PostgreSQL
+- Adminer
+- Drizzle configuration and migrations
+- One V1-informed `garments` table
+- Garment query and create server action
+- Shared UI primitives
+- A compact garment list/create page
+
+Out of scope for the current foundation cleanup: auth, permissions, calculators, inventory, integrations, PK Tax, Commercial Invoice, AI, client portal, and Wix.
