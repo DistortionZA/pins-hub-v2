@@ -108,6 +108,20 @@ Design direction remains:
 - Restrained P&K red accents.
 - Built for daily internal staff use.
 
+### Product UI Copy Rules
+
+These rules apply to product UI only. Repo/docs may still use "V2" when discussing the rebuild project, architecture, migration plan, or spike/foundation phases.
+
+- The app UI must refer to the product as "Pins Hub", not "Pins Hub V2".
+- Version labels such as "V2" must not appear in product UI.
+- Development labels such as "Spike", "Phase 0", "Later", "Coming soon", "MVP", or similar must not appear as UI badges, nav labels, page labels, or card labels.
+- Do not add decorative status pills/badges unless they represent a real operational status users need.
+- Do not add generic descriptions, subtitles, helper copy, or explanatory text to page headers, cards, nav, or module panels.
+- `PageHeader` must not have description, subtitle, or eyebrow props unless explicitly requested later.
+- UI copy should be limited to concise headings, labels, actions, counts, operationally meaningful statuses, and required validation/error text.
+- Avoid internal/development explanations in the UI. Internal users already know what the tool is for.
+- Keep the interface compact, dark, dense, operational, and free of redundant copy.
+
 ---
 
 ## 5. Stack Decision
@@ -1317,6 +1331,12 @@ Checks:
 - No marketing-style hero/gradient/orb design.
 - Consistent buttons/inputs/panels.
 - Good loading/empty states.
+- Product UI says "Pins Hub", not "Pins Hub V2".
+- No version, spike, phase, "coming soon", "later", "MVP", or similar development labels in product UI.
+- No decorative badges/pills unless they communicate real operational status.
+- No generic page header/card/nav/helper descriptions unless explicitly requested.
+- `PageHeader` has no description, subtitle, or eyebrow props unless explicitly requested.
+- UI copy stays limited to concise headings, labels, actions, counts, operational statuses, and required validation/errors.
 
 ### 5. Auth / Permission Boundary Checker
 

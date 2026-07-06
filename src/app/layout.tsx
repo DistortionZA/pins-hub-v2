@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pins Hub V2",
+  title: "Pins Hub",
   description: "Internal operations foundation for Pins & Knuckles.",
 };
 
